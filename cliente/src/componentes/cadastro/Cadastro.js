@@ -14,6 +14,7 @@ class Cadastro extends Component {
   }
 
   facaCadastro = (dados) => {
+    console.log(dados)
     servicos.cadastre(dados)
       .then((r) => this.registreResultado(r))
       .catch(() => this.setState(prevState => ({msg: 'Não conseguiu salvar!'})))

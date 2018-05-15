@@ -9,8 +9,13 @@ if (MONGODB_PRODUTOS === undefined) {
 const produtoSchema = new mongoose.Schema({
   nome: String,
   categoria: String,
-  descricao: Number,
+  descricao: String,
     vendedor: String
+})
+
+const vendedorSchema = new mongoose.Schema({
+    nome: String,
+    id: String
 })
 
 const Produto = mongoose.model('Produto', produtoSchema)

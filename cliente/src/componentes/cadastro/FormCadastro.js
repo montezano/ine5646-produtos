@@ -1,8 +1,12 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 
 import {Card, CardText, CardActions} from 'material-ui/Card';
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import SelectField from 'material-ui/SelectField'
+import MenuItem from 'material-ui/MenuItem'
+
+// const CATEGORIA = require('../data/categoria');
 
 class FormCadastro extends Component {
     state = {
@@ -36,7 +40,8 @@ class FormCadastro extends Component {
         }
     }
 
-    altereCategoria = (ev, valor) => {
+    altereCategoria = (ev, index, valor) => {
+        console.log(valor);
         if (valor === '') {
             this.setState(prevState => ({erroCategoria: 'Campo obrigatório'}))
         } else {
@@ -73,12 +78,17 @@ class FormCadastro extends Component {
                         errorText={this.state.erroNome}
                         onChange={this.altereNome}/>
                     <br/>
-                    <TextField
-                        hintText='selecione a categoria'
+                    <SelectField
                         floatingLabelText='Categoria'
+                        onChange={this.altereCategoria}
                         errorText={this.state.erroCategoria}
-                        onChange={this.altereCategoria}/>
-                    <br/>
+                        value={this.state.categoria}
+                    >
+                        <MenuItem value={'automovel'} primaryText='Automóvel' />
+                        <MenuItem value={'imovel'} primaryText='Imóvel'/>
+                        <MenuItem value={'ferramenta'} primaryText='Ferramenta' />
+                    </SelectField>
+                    <br />
                     <TextField
                         hintText='digite uma descrição para o produto'
                         floatingLabelText='Descrição'

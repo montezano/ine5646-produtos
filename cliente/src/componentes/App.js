@@ -137,7 +137,7 @@ class App extends Component {
     return (
       <Paper zDepth={4}>
         <AppBar
-          title='INE5646 App Livros'
+          title='Super Store - Cadastro de Produtos'
           onLeftIconButtonClick={this.toggleMenu}
           iconElementRight={iconeConexao}
           showMenuIconButton={this.state.mostrarIconeMenu}/>
