@@ -45,10 +45,11 @@ class FormCadastro extends Component {
     }
 
     altereDescricao = (ev, valor) => {
-        if (valor > 0) {
-            this.setState(prevState => ({descricao: valor, erroDescricao: undefined}))
+        if (valor === '') {
+            this.setState(prevState => ({erroDescricao: 'Campo obrigatório'}))
         } else {
-            this.setState(prevState => ({erroDescricao: 'Tem que ser número maior que zero'}))
+            this.setState(prevState => ({descricao: valor, erroDescricao: undefined}))
+
         }
     }
 
@@ -56,7 +57,8 @@ class FormCadastro extends Component {
         const dados = {
             nome: this.state.nome,
             categoria: this.state.categoria,
-            descricao: this.state.descricao
+            descricao: this.state.descricao,
+            vendedor: this.state.vendedor
         }
         this.props.onCadastre(dados)
     }

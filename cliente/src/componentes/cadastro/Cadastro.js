@@ -22,7 +22,7 @@ class Cadastro extends Component {
 
   registreResultado = (r) => {
     const novoEstado = {
-      msg: `Livro cadastrado! Id: ${r.id}`,
+      msg: `Produto cadastrado! Id: ${r.id}`,
       cadastrarNovamente: true
     }
 
