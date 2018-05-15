@@ -1,8 +1,15 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import * as banco from './banco'
+import cors from 'cors'
+
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
+
+import schema from './apollo'
 
 const app = express()
+
+app.use(cors())
 
 app.use(bodyParser.json())
 
@@ -38,5 +45,11 @@ app.get('/apagaPorId', (req, res) => {
   const id = req.query.id
   banco.apagaPorId(res, id)
 })
+
+// The GraphQL endpoint
+app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
+
+// GraphiQL, a visual editor for queries
+app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
 
 app.listen(3001, () => console.log('No ar, porta 3001...'))
