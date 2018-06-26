@@ -13,7 +13,8 @@ const servicos = {
 
       return promResposta
           .then(r => analisaStatusCode(r))
-          .then(r => r.json())
+          .then(r => r.json(),
+              () => Promise.resolve(false))
   }
   ,
   desconecta: () =>

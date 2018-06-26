@@ -34,10 +34,9 @@ class App extends Component {
     this.setState(prevState => ({mostrandoMenu: !this.state.mostrandoMenu}))
 
   autentique = () => {
-      console.log("on autentique")
     const a = this.acao
     const qdoConectar = {conectado: true, executando: a.NADA}
-    const qdoNaoConectar = {conectado: true, executando: a.NADA}
+    const qdoNaoConectar = {conectado: false, executando: a.NADA}
     const qdoConectando = {mostrandoMenu: false, executando: a.AUTENTICAR}
 
     servicos
@@ -158,8 +157,8 @@ class App extends Component {
       case a.NADA:
         conteudo = <h3>Bem-vindo ao sistema.</h3>
         break
-      case a.CONECTAR:
-        conteudo = <h3>Conectando...</h3>
+      case a.AUTENTICAR:
+        conteudo = <h3>Autenticando...</h3>
         break
       case a.DESCONECTAR:
         conteudo = <h3>Desconectando...</h3>
