@@ -41,7 +41,12 @@ class App extends Component {
 
     servicos
       .autentica({usuario: "soldado76"})
-      .then(() => this.setState(prevState => (qdoConectar)))
+        .then(r => {
+            if (r.autenticado)
+                this.setState(prevState => (qdoConectar))
+            else
+                this.setState(prevState => (qdoNaoConectar))
+        })
       .catch(() => this.setState(prevState => (qdoNaoConectar)))
 
     this.setState(prevState => (qdoConectando))
