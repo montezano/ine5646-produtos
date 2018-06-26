@@ -1,14 +1,20 @@
 const servicos = {
-  conecta: () =>
-    fetch('/conecta')
-      .then(r => analisaStatusCode(r))
-      .then(r => r.json())
-      .then(json => {
-        if (json.conectou)
-          return Promise.resolve(true)
-        else
-          return Promise.reject(false)
-      })
+  autentica: (usuario) => {
+      console.log(usuario)
+      const promResposta = fetch(`/autenticado?user=${usuario.usuario}`)
+          .then(r => analisaStatusCode(r))
+          .then(r => r.json())
+      // .then(json => {
+      //   if (json.autenticado)
+      //       return Promise.resolve(true)
+      //   else
+      //     return Promise.reject(false)
+      // })}
+
+      return promResposta
+          .then(r => analisaStatusCode(r))
+          .then(r => r.json())
+  }
   ,
   desconecta: () =>
     fetch('/desconecta')

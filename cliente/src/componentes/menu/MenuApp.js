@@ -15,7 +15,7 @@ const MenuApp = (props) => {
     } else {
       menu =
         <MenuInicial
-          onConecte = {props.conecte}
+          onAutentique = {props.autentique}
           onSobre = {props.mostreSobre} />
     }
 

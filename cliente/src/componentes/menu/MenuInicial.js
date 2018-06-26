@@ -19,8 +19,8 @@ class MenuInicial extends Component {
       <Paper zDepth = {5} style = {this.paperStyle}>
         <Menu>
           <MenuItem
-            primaryText = 'Conectar ao Banco de Dados...'
-            onClick = {this.props.onConecte}/>
+            primaryText = 'Você não está autenticado'
+            onClick = {this.props.onAutentique}/>
           <MenuItem
             primaryText = 'Sobre...'
             onClick = {this.props.onSobre}/>

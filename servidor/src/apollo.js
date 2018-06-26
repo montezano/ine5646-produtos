@@ -12,7 +12,7 @@ const typeDefs = `
 // The resolvers
 const resolvers = {
     Query: {
-        produtos: () => pesquisaTodosProdutos().,
+        produtos: () => pesquisaTodosProdutos(),
         produtoPorId: (root, res, {nome}) => pesquisaPorId(res, nome),
         produtoPorNome: (root, res, {nome}) => pesquisaPorTitulo(res, nome)
     },

@@ -15,9 +15,14 @@ app.use(bodyParser.json())
 
 app.use(express.static('../publico'))
 
-app.get('/conecta', (req, res) => banco.conecta(res))
+banco.conecta()
+app.get('/autenticado', (req, res) => {
+        const user = req.query.user
+        banco.autenticado(res, user)
+    }
+)
 
-app.get('/desconecta', (req, res) => banco.desconecta(res))
+// app.get('/desconecta', (req, res) => banco.desconecta(res))
 
 app.post('/salva', (req, res) => {
   const nome = req.body.nome

@@ -13,7 +13,7 @@ import servicos from '../servicos/servicos'
 class App extends Component {
   acao = {
     NADA: 'nada',
-    CONECTAR: 'conectar',
+    AUTENTICAR: '',
     DESCONECTAR: 'desconectar',
     MOSTRAR_SOBRE: 'mostrar sobre',
     APAGAR_SOBRE: 'apagar sobre',
@@ -33,14 +33,15 @@ class App extends Component {
   toggleMenu = () =>
     this.setState(prevState => ({mostrandoMenu: !this.state.mostrandoMenu}))
 
-  conecte = () => {
+  autentique = () => {
+      console.log("on autentique")
     const a = this.acao
     const qdoConectar = {conectado: true, executando: a.NADA}
     const qdoNaoConectar = {conectado: true, executando: a.NADA}
-    const qdoConectando = {mostrandoMenu: false, executando: a.CONECTAR}
+    const qdoConectando = {mostrandoMenu: false, executando: a.AUTENTICAR}
 
     servicos
-      .conecta()
+      .autentica({usuario: "soldado76"})
       .then(() => this.setState(prevState => (qdoConectar)))
       .catch(() => this.setState(prevState => (qdoNaoConectar)))
 
@@ -62,6 +63,7 @@ class App extends Component {
   }
 
   mostreSobre = () => {
+      console.log("ta foda...")
     const novoEstado = {
       executando: this.acao.MOSTRAR_SOBRE,
       mostrandoMenu: false
@@ -125,7 +127,7 @@ class App extends Component {
       menu = <MenuApp
         conectado = {this.state.conectado}
         mostreSobre = {this.mostreSobre}
-        conecte = {this.conecte}
+        autentique = {this.autentique}
         desconecte = {this.desconecte}
         cadastre = {this.cadastre}
         pesquise = {this.pesquise}/>

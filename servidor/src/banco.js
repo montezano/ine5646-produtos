@@ -21,19 +21,28 @@ const vendedorSchema = new mongoose.Schema({
 
 const Produto = mongoose.model('Produto', produtoSchema)
 
-function conecta(res) {
-    mongoose.connect(MONGODB_PRODUTOS, {keepAlive: 200}).then(
-        () => res.json({conectou: true}),
-        () => res.json({conectou: false})
-    )
+function autenticado(res, user) {
+    console.log(user)
+    if(user === 'soldado76') {
+        res.json({autenticado: true})
+        console.log("autenticado")
+    } else {
+        res.json({autenticado: false})
+        console.log("nao autenticado")
+    }
+
 }
 
-function desconecta(res) {
-    mongoose.disconnect().then(
-        () => res.json({desconectou: true}),
-        () => res.json({desconectou: false})
-    )
+function conecta() {
+    mongoose.connect(MONGODB_PRODUTOS, {keepAlive: 200, autoReconnect: true})
 }
+
+// function desconecta(res) {
+//     mongoose.disconnect().then(
+//         () => res.json({desconectou: true}),
+//         () => res.json({desconectou: false})
+//     )
+// }
 
 function salva(res, nome, categoria, descricao, vendedor) {
     const produto = new Produto({nome: nome, categoria: categoria, descricao: descricao, vendedor: vendedor})
@@ -100,7 +109,7 @@ function pesquisaTodosProdutos() {
 const copia = ({__id, nome, categoria, descricao, vendedor, __v}) => ({nome, categoria, descricao, vendedor})
 
 export {
-    conecta, desconecta, salva,
+    autenticado, conecta, salva,
     pesquisaPorId, pesquisaTodos, pesquisaPorTitulo, apagaTudo, apagaPorId, pesquisaTodosProdutos
 }
 
