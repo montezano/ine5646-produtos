@@ -23,7 +23,7 @@ const Produto = mongoose.model('Produto', produtoSchema)
 
 function autenticado(res, user) {
     console.log(user)
-    if(user === 'soldado76') {
+    if(user === 'Leo') {
         res.json({autenticado: true})
         console.log("autenticado")
     } else {
@@ -82,8 +82,8 @@ function apagaTudo(res) {
 }
 
 // Obs: Sempre retorna true, mesmo quando id não existe
-function apagaPorId(res, id) {
-    Produto.deleteOne({_id: id}).then(
+function apagaPorId(res, id, vendedor) {
+    Produto.deleteOne({_id: id, vendedor: vendedor}).then(
         () => res.json({removeu: true}),
         () => res.json({removeu: false})
     )
@@ -110,7 +110,7 @@ const copia = ({__id, nome, categoria, descricao, vendedor, __v}) => ({nome, cat
 
 export {
     autenticado, conecta, salva,
-    pesquisaPorId, pesquisaTodos, pesquisaPorTitulo, apagaTudo, apagaPorId, pesquisaTodosProdutos
+    pesquisaPorId, pesquisaTodos, pesquisaPorTitulo, apagaPorId, pesquisaTodosProdutos
 }
 
 

@@ -40,7 +40,7 @@ class App extends Component {
     const qdoConectando = {mostrandoMenu: false, executando: a.AUTENTICAR}
 
     servicos
-      .autentica({usuario: "soldado76"})
+      .autentica({usuario: "Leo"})
         .then(r => {
             if (r.autenticado)
                 this.setState(prevState => (qdoConectar))

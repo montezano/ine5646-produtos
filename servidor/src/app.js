@@ -6,6 +6,7 @@ import cors from 'cors'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 
 import schema from './apollo'
+import * as autenticacao from './autenticacao'
 
 const app = express()
 
@@ -16,20 +17,32 @@ app.use(bodyParser.json())
 app.use(express.static('../publico'))
 
 banco.conecta()
+
 app.get('/autenticado', (req, res) => {
         const user = req.query.user
         banco.autenticado(res, user)
     }
 )
 
+app.get('/', function(req, res){
+    autenticacao.autentique(req.query.user)
+    res.redirect('http://localhost:3000')
+})
+
 // app.get('/desconecta', (req, res) => banco.desconecta(res))
 
 app.post('/salva', (req, res) => {
-  const nome = req.body.nome
-  const categoria = req.body.categoria
-  const descricao = req.body.descricao
-    const vendedor = req.body.vendedor
-  banco.salva(res, nome, categoria, descricao, vendedor)
+
+    if(autenticacao.autenticado()) {
+        const nome = req.body.nome
+        const categoria = req.body.categoria
+        const descricao = req.body.descricao
+        const vendedor = autenticacao.logado()
+        console.log(vendedor)
+        banco.salva(res, nome, categoria, descricao, vendedor)
+    } else
+        () => res.json({salvou: false})
+
 })
 
 app.get('/pesquisaPorId', (req, res) => {
@@ -44,11 +57,18 @@ app.get('/pesquisaPorNome', (req, res) => {
   banco.pesquisaPorTitulo(res, produto)
 })
 
-app.get('/apagaTudo', (req, res) => banco.apagaTudo(res))
+// app.get('/apagaTudo', (req, res) => {
+//     if(autenticacao.autenticado()) {
+//         banco.apagaTudo(res))
+//     }
+//
+//
+// }
 
 app.get('/apagaPorId', (req, res) => {
-  const id = req.query.id
-  banco.apagaPorId(res, id)
+        const id = req.query.id
+        const vendedor = autenticacao.logado();
+        banco.apagaPorId(res, id, vendedor)
 })
 
 // The GraphQL endpoint

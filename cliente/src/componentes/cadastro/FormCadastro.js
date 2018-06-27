@@ -16,7 +16,7 @@ class FormCadastro extends Component {
         erroCategoria: undefined,
         descricao: undefined,
         erroDescricao: undefined,
-        vendedor: "Lúcio",
+        vendedor: undefined,
         erroVendedor: undefined
     }
 
@@ -29,7 +29,7 @@ class FormCadastro extends Component {
             s.nome !== undefined &&
             s.categoria !== undefined &&
             s.descricao !== undefined &&
-            s.vendedor !== undefined
+            s.vendedor === undefined
     }
 
     altereNome = (ev, valor) => {
@@ -63,7 +63,6 @@ class FormCadastro extends Component {
             nome: this.state.nome,
             categoria: this.state.categoria,
             descricao: this.state.descricao,
-            vendedor: this.state.vendedor
         }
         this.props.onCadastre(dados)
     }

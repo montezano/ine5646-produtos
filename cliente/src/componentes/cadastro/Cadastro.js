@@ -22,12 +22,22 @@ class Cadastro extends Component {
   }
 
   registreResultado = (r) => {
-    const novoEstado = {
-      msg: `Produto cadastrado! Id: ${r.id}`,
-      cadastrarNovamente: true
-    }
+      if(r.salvou) {
+          const novoEstado = {
+              msg: `Produto cadastrado! Id: ${r.id}`,
+              cadastrarNovamente: true
+          }
+          this.setState(prevState => (novoEstado))
+      } else {
+          const novoEstado = {
+              msg: `Não autorizado`,
+              cadastrarNovamente: false
+          }
+          this.setState(prevState => (novoEstado))
+      }
 
-    this.setState(prevState => (novoEstado))
+
+    // this.setState(prevState => (novoEstado))
   }
 
   facaNovoCadastro = () => {

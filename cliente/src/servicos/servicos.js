@@ -12,16 +12,12 @@ const servicos = {
       .then(r => Promise.resolve(true))
   ,
   cadastre: (dados) => {
-    const promResposta =
-      fetch('/salva', {
+    return fetch(`/salva?user=${dados.vendedor}`, {
         method: 'post',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify(dados)
-      })
-
-    return promResposta
-      .then(r => analisaStatusCode(r))
-      .then(r => r.json())
+      }).then(r => analisaStatusCode(r))
+        .then(r => r.json())
   }
   ,
   pesquiseTodos: () => {
