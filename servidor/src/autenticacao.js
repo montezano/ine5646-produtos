@@ -10,8 +10,7 @@ function logado() {
 }
 
 function autentique(atual) {
-    console.log(state.usuario)
-    state.usuario = atual;
+    state.usuario = atual.nome;
 }
 
 function autenticado(){

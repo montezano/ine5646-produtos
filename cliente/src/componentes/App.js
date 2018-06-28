@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar';
 import Sobre from './sobre/Sobre'
 import MenuApp from './menu/MenuApp'
 import Cadastro from './cadastro/Cadastro'
+import Remocao from './remocao/Remocao'
 import Pesquisa from './pesquisa/Pesquisa'
 import IconeConexao from './util/IconeConexao'
 import servicos from '../servicos/servicos'
@@ -18,14 +19,16 @@ class App extends Component {
     MOSTRAR_SOBRE: 'mostrar sobre',
     APAGAR_SOBRE: 'apagar sobre',
     CADASTRAR: 'cadastrar',
+    REMOVER: 'remover',
     FECHAR_CADASTRO: 'fechar cadastro',
-    PESQUISAR: 'pesquisar',
+      FECHAR_REMOVE: 'fechar remove',
+      PESQUISAR: 'pesquisar',
     FECHAR_PESQUISA: 'fechar pesquisa'
   }
 
   state = {
     executando: this.acao.NADA,
-    conectado: false,
+    conectado: true,
     mostrandoMenu: false,
     mostrarIconeMenu: true
    }
@@ -67,7 +70,6 @@ class App extends Component {
   }
 
   mostreSobre = () => {
-      console.log("ta foda...")
     const novoEstado = {
       executando: this.acao.MOSTRAR_SOBRE,
       mostrandoMenu: false
@@ -94,6 +96,15 @@ class App extends Component {
     this.setState(prevState => (novoEstado))
   }
 
+    remover = () => {
+        const novoEstado = {
+            mostrandoMenu: false,
+            executando: this.acao.REMOVER,
+            mostrarIconeMenu: false
+        }
+        this.setState(prevState => (novoEstado))
+    }
+
   pesquise = () => {
     const novoEstado = {
       mostrandoMenu: false,
@@ -110,6 +121,14 @@ class App extends Component {
     }
     this.setState(prevState => (novoEstado))
   }
+
+    fecheRemove = () => {
+        const novoEstado = {
+            executando: this.acao.FECHAR_REMOVE,
+            mostrarIconeMenu: true
+        }
+        this.setState(prevState => (novoEstado))
+    }
 
   fechePesquisa = () => {
     const novoEstado = {
@@ -134,6 +153,7 @@ class App extends Component {
         autentique = {this.autentique}
         desconecte = {this.desconecte}
         cadastre = {this.cadastre}
+        remover = {this.remover}
         pesquise = {this.pesquise}/>
 
     const conteudo = this.__definaConteudo(this.state.executando)
@@ -177,7 +197,13 @@ class App extends Component {
       case a.CADASTRAR:
         conteudo = <Cadastro onCancele={this.fecheCadastro}/>
         break
+      case a.REMOVER:
+        conteudo = <Remocao onCancele={this.fecheRemove}/>
+        break
       case a.FECHAR_CADASTRO:
+        conteudo = <h3>Bem-vindo ao sistema</h3>
+        break
+      case a.FECHAR_REMOVE:
         conteudo = <h3>Bem-vindo ao sistema</h3>
         break
       case a.PESQUISAR:

@@ -2,6 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import * as banco from './banco'
 import cors from 'cors'
+import fetch from 'node-fetch'
 
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 
@@ -18,6 +19,7 @@ app.use(express.static('../publico'))
 
 banco.conecta()
 
+
 app.get('/autenticado', (req, res) => {
         const user = req.query.user
         banco.autenticado(res, user)
@@ -25,8 +27,13 @@ app.get('/autenticado', (req, res) => {
 )
 
 app.get('/', function(req, res){
-    autenticacao.autentique(req.query.user)
-    res.redirect('http://localhost:3000')
+    fetch(`http://150.162.244.229:3001/user?token=${req.query.token}`)
+        .then(function(response) {
+            return response.json();
+        }).then(function(json){
+            autenticacao.autentique(json)
+            res.redirect('http://localhost:3000')
+    })
 })
 
 // app.get('/desconecta', (req, res) => banco.desconecta(res))
@@ -67,6 +74,7 @@ app.get('/pesquisaPorNome', (req, res) => {
 
 app.get('/apagaPorId', (req, res) => {
         const id = req.query.id
+    console.log(id);
         const vendedor = autenticacao.logado();
         banco.apagaPorId(res, id, vendedor)
 })

@@ -25,6 +25,9 @@ class MenuConectado extends Component {
             <MenuItem
               primaryText = 'Pesquisar produto...'
               onClick = {this.props.onPesquise}/>
+            <MenuItem
+              primaryText = 'Remover produto...'
+              onClick = {this.props.onRemove}/>
           <Divider/>
           <MenuItem
             primaryText = 'Desconectar do Banco de Dados'

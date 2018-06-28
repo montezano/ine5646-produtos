@@ -10,6 +10,7 @@ const MenuApp = (props) => {
         <MenuConectado
           onCadastre = {props.cadastre}
           onPesquise = {props.pesquise}
+          onRemove = {props.remover}
           onDesconecte = {props.desconecte}
           onSobre = {props.mostreSobre} />
     } else {

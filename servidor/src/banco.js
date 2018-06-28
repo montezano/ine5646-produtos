@@ -83,7 +83,7 @@ function apagaTudo(res) {
 
 // Obs: Sempre retorna true, mesmo quando id não existe
 function apagaPorId(res, id, vendedor) {
-    Produto.deleteOne({_id: id, vendedor: vendedor}).then(
+    Produto.deleteOne({nome: id}).then(
         () => res.json({removeu: true}),
         () => res.json({removeu: false})
     )

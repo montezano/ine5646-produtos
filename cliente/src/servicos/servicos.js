@@ -20,6 +20,12 @@ const servicos = {
         .then(r => r.json())
   }
   ,
+    remove: (dados) => {
+        return fetch(`/apagaPorId?id=${dados.id}`)
+            .then(r => analisaStatusCode(r))
+            .then(r => r.json())
+    }
+    ,
   pesquiseTodos: () => {
     return fetch('/pesquisaTodos')
       .then(r => analisaStatusCode(r))

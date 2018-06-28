@@ -10,7 +10,7 @@ import FormCadastro from './FormCadastro'
 class Cadastro extends Component {
   state = {
     msg: undefined,
-    cadastrarNovamente: false
+    removerNovamente: false
   }
 
   facaCadastro = (dados) => {
@@ -18,20 +18,20 @@ class Cadastro extends Component {
     servicos.cadastre(dados)
       .then((r) => this.registreResultado(r))
       .catch(() => this.setState(prevState => ({msg: 'Não conseguiu salvar!'})))
-    this.setState(prevState => ({msg: undefined, cadastrarNovamente: false}))
+    this.setState(prevState => ({msg: undefined, removerNovamente: false}))
   }
 
   registreResultado = (r) => {
       if(r.salvou) {
           const novoEstado = {
               msg: `Produto cadastrado! Id: ${r.id}`,
-              cadastrarNovamente: true
+              removerNovamente: true
           }
           this.setState(prevState => (novoEstado))
       } else {
           const novoEstado = {
               msg: `Não autorizado`,
-              cadastrarNovamente: false
+              removerNovamente: false
           }
           this.setState(prevState => (novoEstado))
       }
@@ -43,7 +43,7 @@ class Cadastro extends Component {
   facaNovoCadastro = () => {
     const novoEstado = {
       msg: undefined,
-      cadastrarNovamente: false
+      removerNovamente: false
     }
 
     this.setState(prevState => (novoEstado))
@@ -63,7 +63,7 @@ class Cadastro extends Component {
     if (this.state.msg !== undefined)
       msg = <h4>{this.state.msg}</h4>
 
-    if (this.state.cadastrarNovamente) {
+    if (this.state.removerNovamente) {
       conteudo =
         <div>
           <h4>Cadastrar mais um?</h4>
