@@ -1,5 +1,5 @@
 {
-  "name": "app_livros",
+  "name": "produtos",
   "version": "1.0.0",
   "description": "Aplicação que mostra o uso de MongoDB e React",
   "main": "index.js",
@@ -12,7 +12,7 @@
     "MongoDB",
     "React"
   ],
-  "author": "Leandro J. Komosinski",
+  "author": "Pablo MOntezano",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",

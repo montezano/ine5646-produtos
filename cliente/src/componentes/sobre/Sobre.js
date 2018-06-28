@@ -13,13 +13,7 @@ class Sobre extends Component {
         <Card>
           <CardHeader title='Finalidade'/>
           <CardText>
-            Esta aplicação permite que dados sobre livros sejam armazenados
-            em um banco MongoDB.
-          </CardText>
-          <CardHeader title='Tecnologias'/>
-          <CardText>
-            Bibliotecas utilizadas: Mongoose para acessar o banco e Material-UI
-            para os componentes React.
+            Aplicação que permite o cadastro de produtos.
           </CardText>
         </Card>
       </Dialog>
